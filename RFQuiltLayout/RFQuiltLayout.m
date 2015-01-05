@@ -284,6 +284,12 @@
             if((vert? self.firstOpenSpace.y : self.firstOpenSpace.x) >= endRow)
                 return;
         }
+        
+        // CPT: Set the furthestBlockPoint to the last point in the current row so that the next section will start on a new row
+        CGPoint newFurthestPoint = vert ? CGPointMake([self restrictedDimensionBlockSize], self.furthestBlockPoint.y) : CGPointMake(self.furthestBlockPoint.x, [self restrictedDimensionBlockSize]);
+        CGPoint newFirstSpace = vert ? CGPointMake(0, self.furthestBlockPoint.y + 1) : CGPointMake(self.furthestBlockPoint.x + 1, 0);
+        [self setFurthestBlockPoint:newFurthestPoint];
+        [self setFirstOpenSpace:newFirstSpace];
     }
 }
 
@@ -293,6 +299,7 @@
     // a vertical layout, then when we assign positions to
     // the items we'll invert the axis
     
+    BOOL vert = self.scrollDirection == UICollectionViewScrollDirectionVertical;
     NSInteger numSections = [self.collectionView numberOfSections];
     for (NSInteger section=self.lastIndexPathPlaced.section; section<numSections; section++) {
         NSInteger numRows = [self.collectionView numberOfItemsInSection:section];
@@ -307,6 +314,11 @@
             if([self placeBlockAtIndex:indexPath]) { self.lastIndexPathPlaced = indexPath; }
             
         }
+        // CPT: Set the furthestBlockPoint to the last point in the current row so that the next section will start on a new row
+        CGPoint newFurthestPoint = vert ? CGPointMake([self restrictedDimensionBlockSize], self.furthestBlockPoint.y) : CGPointMake(self.furthestBlockPoint.x, [self restrictedDimensionBlockSize]);
+        CGPoint newFirstSpace = vert ? CGPointMake(0, self.furthestBlockPoint.y + 1) : CGPointMake(self.furthestBlockPoint.x + 1, 0);
+        [self setFurthestBlockPoint:newFurthestPoint];
+        [self setFirstOpenSpace:newFirstSpace];
     }
 }
 

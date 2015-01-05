@@ -26,7 +26,7 @@
 	for(int i=0; i < 8; i++)
 	{
 		NSMutableArray *section = [NSMutableArray array];
-		for(int j=0; j < 28; j++)
+		for(int j=0; j < 10; j++)
 		{
 			[section addObject:@(num)];
 			num ++;
@@ -41,10 +41,10 @@
     RFQuiltLayout* layout = (id)[self.collectionView collectionViewLayout];
     layout.scrollDirection = UICollectionViewScrollDirectionVertical;
     layout.itemBlockSize = CGSizeMake(100, 100);
-	layout.sectionInset = UIEdgeInsetsMake(10, 150, 50, 150);
+//	layout.sectionInset = UIEdgeInsetsMake(10, 10, 50, 10);
 	layout.itemInset = UIEdgeInsetsMake(4, 4, 4, 4);
-	layout.headerReferenceSize = CGSizeMake(720, 70);
-	layout.footerReferenceSize = CGSizeMake(720, 70);
+	layout.headerReferenceSize = CGSizeMake(720, 20);
+	layout.footerReferenceSize = CGSizeMake(720, 20);
     
     [self.collectionView reloadData];
 }
