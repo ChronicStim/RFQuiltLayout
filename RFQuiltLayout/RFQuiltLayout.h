@@ -62,5 +62,7 @@
 @property(nonatomic) NSIndexPath* lastIndexPathPlaced;
 
 - (NSArray *)indexPathsInRect:(CGRect)rect;
+- (CGRect) frameForIndexPath:(NSIndexPath*)indexPath;
+- (UIEdgeInsets)sectionInsetForSection:(NSInteger)section;
 
 @end
