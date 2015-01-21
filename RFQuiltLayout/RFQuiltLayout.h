@@ -64,5 +64,12 @@
 - (NSArray *)indexPathsInRect:(CGRect)rect;
 - (CGRect) frameForIndexPath:(NSIndexPath*)indexPath;
 - (UIEdgeInsets)sectionInsetForSection:(NSInteger)section;
+- (CGSize)getBlockSizeForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (BOOL) traverseOpenTiles:(BOOL(^)(CGPoint))block;
+- (BOOL) traverseTilesForPoint:(CGPoint)point withSize:(CGSize)size iterator:(BOOL(^)(CGPoint))block;
+- (NSIndexPath*)indexPathForPosition:(CGPoint)point;
+- (int) restrictedDimensionBlockSize;
+- (void) setIndexPath:(NSIndexPath*)path forPosition:(CGPoint)point;
+- (void) setPosition:(CGPoint)point forIndexPath:(NSIndexPath*)indexPath;
 
 @end
