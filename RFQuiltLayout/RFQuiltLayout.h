@@ -61,6 +61,8 @@
 // relayout the same indexpaths while scrolling
 @property(nonatomic) NSIndexPath* lastIndexPathPlaced;
 
+- (void) initialize;
+- (void) clearPositions;
 - (NSArray *)indexPathsInRect:(CGRect)rect;
 - (CGRect) frameForIndexPath:(NSIndexPath*)indexPath;
 - (UIEdgeInsets)sectionInsetForSection:(NSInteger)section;

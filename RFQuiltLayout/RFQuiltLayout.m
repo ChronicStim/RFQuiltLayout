@@ -268,6 +268,7 @@
         CGPoint newFirstSpace = vert ? CGPointMake(0, self.furthestBlockPoint.y + 1) : CGPointMake(self.furthestBlockPoint.x + 1, 0);
         [self setFurthestBlockPoint:newFurthestPoint];
         [self setFirstOpenSpace:newFirstSpace];
+ 
     }
 }
 
@@ -401,7 +402,8 @@
     return YES;
 }
 
-- (void) clearPositions {
+- (void) clearPositions;
+{
     self.indexPathByPosition = [NSMutableDictionary dictionary];
     self.positionByIndexPath = [NSMutableDictionary dictionary];
 }
