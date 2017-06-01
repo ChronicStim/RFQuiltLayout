@@ -230,7 +230,7 @@
 
 - (UIEdgeInsets)sectionInsetForSection:(NSInteger)section
 {
-	if([self.delegate respondsToSelector:@selector(insetForSectionAtIndexPath:)])
+	if([self.delegate respondsToSelector:@selector(insetForSectionAtIndex:)])
         return [self.delegate insetForSectionAtIndex:section];
 	else
 		return _sectionInset;
