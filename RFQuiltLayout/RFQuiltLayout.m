@@ -199,7 +199,9 @@
     
     BOOL isVert = self.scrollDirection == UICollectionViewScrollDirectionVertical;
     
-    CGRect scrollFrame = CGRectMake(self.collectionView.contentOffset.x, self.collectionView.contentOffset.y, self.collectionView.frame.size.width, self.collectionView.frame.size.height);
+    CGPoint contentOffset = [[self collectionView] contentOffset];
+    CGSize collectionViewSize = [[self collectionView] visibleSize];
+    CGRect scrollFrame = CGRectMake(contentOffset.x, contentOffset.y, collectionViewSize.width, collectionViewSize.height);
     
     int unrestrictedRow = 0;
     if (isVert)
