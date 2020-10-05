@@ -14,6 +14,8 @@
 }
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (nonatomic) NSMutableArray* sections;
+@property (nonatomic) NSMutableDictionary* blockSizeCache;
+
 @end
 
 @implementation RFViewController
@@ -21,13 +23,20 @@
 - (void)viewDidLoad {
     
 	self.sections = [NSMutableArray array];
-	
+    self.blockSizeCache = [NSMutableDictionary new];
+    
 	int num = 0;
 	for(int i=0; i < 8; i++)
 	{
 		NSMutableArray *section = [NSMutableArray array];
 		for(int j=0; j < 10; j++)
 		{
+            int w = arc4random_uniform(3) + 1;
+            int h = arc4random_uniform(3) + 1;
+            NSValue *sizeValue = [NSValue valueWithCGSize:CGSizeMake(w, h)];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForItem:j inSection:i];
+            self.blockSizeCache[indexPath] = sizeValue;
+
 			[section addObject:@(num)];
 			num ++;
 		}
@@ -89,8 +98,13 @@
     return [UIColor colorWithHue:((19 * num.intValue) % 255)/255.f saturation:1.f brightness:1.f alpha:1.f];
 }
 
-- (CGSize)blockSizeForNumber:(NSNumber*)num {
-	return ([num intValue] % 2 ? CGSizeMake(1, 1) : CGSizeMake(2, 1));
+- (CGSize)blockSizeForIndexPath:(NSIndexPath*)indexPath {
+    NSValue *sizeValue = self.blockSizeCache[indexPath];
+    CGSize blockSize = CGSizeZero;
+    if (nil != sizeValue) {
+        blockSize = sizeValue.CGSizeValue;
+    }
+    return blockSize;
 }
 
 #pragma mark - UICollectionView Datasource
@@ -146,8 +160,8 @@
 #pragma mark – RFQuiltLayoutDelegate
 
 - (CGSize) blockSizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-	NSNumber *number = [[self.sections objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	return [self blockSizeForNumber:number];
+
+    return [self blockSizeForIndexPath:indexPath];
 }
 
 @end
